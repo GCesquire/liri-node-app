@@ -106,31 +106,26 @@ function identifySong(parameter) {
 
 function movieInfo(parameter) {
 
-    var findMovie;
-    if (parameter === undefined) {
-        findMovie = "Mr. Nobody";
-    } else {
-        findMovie = parameter;
-    };
+	var queryUrl = "http://www.omdbapi.com/?t=" + parameter + "&y=&plot=short&apikey=40e9cece";
 
-    var queryUrl = "http://www.omdbapi.com/?i=" + findMovie + "tt3896198&apikey=trilogy";
-    request(queryUrl, function(err, res, body) {
-        var bodyOf = JSON.parse(body);
-
-        if (!err && res.statusCode === 200) {
-            logIt("\n---------------------------------------------------\n");
-            logIt("Title Of The Movie: " + bodyOf.Title);
-            logIt("Year The Movie Came Out: " + bodyOf.Year);
-            logIt("IMDB Rating Of The Movie: " + bodyOf.imdbRating);
-            logIt("Rotten Tomatoes Rating Of The Movie: " + bodyOf.Ratings[1].Value); 
-            logIt("Country Where The Movie Was Produced: " + bodyOf.Country);
-            logIt("Language Of The Movie: " + bodyOf.Language);
-            logIt("Plot Of The Movie: " + bodyOf.Plot);
-            logIt("Actors In The Movie: " + bodyOf.Actors);
-            logIt("\n---------------------------------------------------\n");
+	request(queryUrl, function(error, response, body) {
+		if (!parameter){
+            parameter = 'Mr Nobody';
         }
-    });
+		if (!error && response.statusCode === 200) {
+
+            logIt("Title: " + JSON.parse(body).Title);
+            logIt("Release Year: " + JSON.parse(body).Year);
+            logIt("IMDB Rating: " + JSON.parse(body).imdbRating);
+            logIt("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+            logIt("Country: " + JSON.parse(body).Country);
+            logIt("Language: " + JSON.parse(body).Language);
+            logIt("Plot: " + JSON.parse(body).Plot);
+            logIt("Actors: " + JSON.parse(body).Actors);
+		}
+	});
 };
+
 
 function getRandom() {
     fs.readFile('random.txt', "utf8", function(error, data){
@@ -169,6 +164,5 @@ function logIt(dataToLog) {
 		if (err) return logIt('Error logging data to file: ' + err);	
 	});
 }
-
 
 switchCase();
