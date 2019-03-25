@@ -2,8 +2,8 @@ require("dotenv").config();
 var fs = require("fs");
 var keys = require("./keys.js");
 var request = require('request');
-var Spotify = require('node-spotify-api');
-var spotify = new Spotify(keys.spotify);
+var spotifyInstance = require('node-spotify-api');
+var parseSpotify = new spotifyInstance(keys.spotify);
 var action = process.argv[2];
 var parameter = process.argv[3];
 
@@ -16,11 +16,11 @@ function switchCase() {
         break;                          
 
         case 'spotify-this-song':
-        identifySong(parameter);
+        spotify(parameter);
         break;
 
         case 'movie-this':
-        movieInfo(parameter);
+        omdb(parameter);
         break;
 
         case 'do-what-it-says':
@@ -28,83 +28,83 @@ function switchCase() {
         break;
 
         default:                            
-        logIt("Invalid Instruction");
+        dataLog("Sorry Try Again!");
         break;
     }
 };
 
-function bandsInTown(parameter){
+const bandsInTown = (parameter) => {
 
     if (action === 'concert-this')  {
-        var movieName="";
+        var conertName="";
         for (var i = 3; i < process.argv.length; i++)   {
-            movieName+=process.argv[i];
+            conertName+=process.argv[i];
         }
-        console.log(movieName);
+        console.log(conertName);
         } else {
-            movieName = parameter;
+            conertName = parameter;
     }
 
-    var queryUrl = "https://rest.bandsintown.com/artists/"+movieName+"/events?app_id=codingbootcamp";
+    var queryUrl = "https://rest.bandsintown.com/artists/"+conertName+"/events?app_id=codingbootcamp";
 
     request(queryUrl, function(error, response, body) {
 
         if (!error && response.statusCode === 200) {
 
-            var JS = JSON.parse(body);
+            var parsedJSON = JSON.parse(body);
         
-            for (i = 0; i < JS.length; i++) {
-                var dTime = JS[i].datetime;
-                var month = dTime.substring(5,7);
-                var year = dTime.substring(0,4);
-                var day = dTime.substring(8,10);
+            for (i = 0; i < parsedJSON.length; i++) {
+                var concertTime = parsedJSON[i].datetime;
+                var month = concertTime.substring(5,7);
+                var year = concertTime.substring(0,4);
+                var day = concertTime.substring(8,10);
                 var dateForm = month + "/" + day + "/" + year
 
-                logIt("\n---------------------------------------------------\n");
-                logIt("Date: " + dateForm);
-                logIt("Name: " + JS[i].venue.name);
-                logIt("City: " + JS[i].venue.city);
+                dataLog("\n---------------------------------------------------\n");
+                dataLog("Date: " + dateForm);
+                dataLog("Name: " + parsedJSON[i].venue.name);
+                dataLog("City: " + parsedJSON[i].venue.city);
 
-                if (JS[i].venue.region !== "")  {
-                    logIt("Country: " + JS[i].venue.region);
+                if (parsedJSON[i].venue.region !== "")  {
+                    dataLog("Country: " + parsedJSON[i].venue.region);
                 }
-                logIt("Country: " + JS[i].venue.country);
-                logIt("\n---------------------------------------------------\n");
+                dataLog("Country: " + parsedJSON[i].venue.country);
+                dataLog("\n---------------------------------------------------\n");
             }   
         }
     });
 }
 
-function identifySong(parameter) {
+const spotify = (parameter) => {
 
-    var searchSong;
+    var songToSearch;
     if (parameter === undefined) {
-        searchSong = "The Sign ace of base";
+        songToSearch = "The Sign ace of base";
     } else {
-        searchSong = parameter;
+        songToSearch = parameter;
     }
 
-    spotify.search({
+    parseSpotify.search({
         type: 'track',
-        query: searchSong
+        query: songToSearch
     }, 
     
     function(error, data) {
         if (error) {
-            logIt('Error occurred: ' + error);
+            dataLog('Error occurred: ' + error);
             return;
         } else {
-            logIt("\n---------------------------------------------------\n");
-            logIt("Artist: " + data.tracks.items[0].artists[0].name);
-            logIt("Song: " + data.tracks.items[0].name);
-            logIt("Preview: " + data.tracks.items[3].preview_url);
-            logIt("Album: " + data.tracks.items[0].album.name);
-            logIt("\n---------------------------------------------------\n");
+            dataLog("\n---------------------------------------------------\n");
+            dataLog("Artist: " + data.tracks.items[0].artists[0].name);
+            dataLog("Song: " + data.tracks.items[0].name);
+            dataLog("Preview: " + data.tracks.items[3].preview_url);
+            dataLog("Album: " + data.tracks.items[0].album.name);
+            dataLog("\n---------------------------------------------------\n");
         }
     });
 };
 
-function movieInfo(parameter) {
+const omdb = (parameter) => {
 
 	var queryUrl = "http://www.omdbapi.com/?t=" + parameter + "&y=&plot=short&apikey=40e9cece";
 
@@ -114,14 +114,14 @@ function movieInfo(parameter) {
         }
 		if (!error && response.statusCode === 200) {
 
-            logIt("Title: " + JSON.parse(body).Title);
-            logIt("Release Year: " + JSON.parse(body).Year);
-            logIt("IMDB Rating: " + JSON.parse(body).imdbRating);
-            logIt("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-            logIt("Country: " + JSON.parse(body).Country);
-            logIt("Language: " + JSON.parse(body).Language);
-            logIt("Plot: " + JSON.parse(body).Plot);
-            logIt("Actors: " + JSON.parse(body).Actors);
+            dataLog("Title Of The Movie: " + JSON.parse(body).Title);
+            dataLog("Year The Movie Came Out: " + JSON.parse(body).Year);
+            dataLog("IMDB Rating Of The Movie: " + JSON.parse(body).imdbRating);
+            dataLog("Rotten Tomatoes Rating Of The Movie: " + JSON.parse(body).Ratings[1].Value);
+            dataLog("Country Where The Movie Was Produced: " + JSON.parse(body).Country);
+            dataLog("Language Of The Movie: " + JSON.parse(body).Language);
+            dataLog("Plot Of The Movie: " + JSON.parse(body).Plot);
+            dataLog("Actors In The Movie: " + JSON.parse(body).Actors);
 		}
 	});
 };
@@ -131,37 +131,37 @@ function getRandom() {
     fs.readFile('random.txt', "utf8", function(error, data){
 
         if (error) {
-            return logIt(error);
+            return dataLog(error);
         }
 
-        var dataArr = data.split(",");
+        var dataArray = data.split(",");
     
-        if (dataArr[0] === "spotify-this-song") {
-            var songcheck = dataArr[1].trim().slice(1, -1);
-            identifySong(songcheck);
-        } else if (dataArr[0] === "concert-this") { 
-            if (dataArr[1].charAt(1) === "'")   {
-                var dLength = dataArr[1].length - 1;
-                var data = dataArr[1].substring(2,dLength);
+        if (dataArray[0] === "spotify-this-song") {
+            var songcheck = dataArray[1].trim().slice(1, -1);
+            spotify(songcheck);
+        } else if (dataArray[0] === "concert-this") { 
+            if (dataArray[1].charAt(1) === "'")   {
+                var dataLength = dataArray[1].length - 1;
+                var data = dataArray[1].substring(2,dataLength);
                 console.log(data);
                 bandsInTown(data);
             } else {
-                var bandName = dataArr[1].trim();
+                var bandName = dataArray[1].trim();
                 console.log(bandName);
                 bandsInTown(bandName);
             }
-        } else if(dataArr[0] === "movie-this") {
-            var movie_name = dataArr[1].trim().slice(1, -1);
-            movieInfo(movie_name);
+        } else if(dataArray[0] === "movie-this") {
+            var movie_name = dataArray[1].trim().slice(1, -1);
+            omdb(movie_name);
         } 
     });
 };
 
-function logIt(dataToLog) {
+function dataLog(dataToLog) {
 
 	console.log(dataToLog);
 	fs.appendFile('log.txt', dataToLog + '\n', function(err) {
-		if (err) return logIt('Error logging data to file: ' + err);	
+		if (err) return dataLog('Error logging data to file: ' + err);	
 	});
 }
 
