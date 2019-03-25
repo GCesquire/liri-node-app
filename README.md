@@ -10,43 +10,43 @@ By typing the appropirate instructions into the Command Line, the user may retri
 
 ### Bands In Town:
 
-Command:
-
-node liri.js concert-this (Insert Band OR Artist Name)
+Command: node liri.js concert-this (Insert Band OR Artist Name)
 
 The above command will search the Bands in Town Artist Events API for an artist and render the following information about each event to the terminal:
 
-Name of the venue
-Venue location
-Date of the Event (use moment to format this as "MM/DD/YYYY")
+Name Of The Venue
+Venue Location
+Date Of The Event
 
 
 ### Spotify:
 
-node liri.js spotify-this-song <Insert Song Title>
-This will show the following information about the song in your terminal/bash window
-Artist(s)
-The song's name
-A preview link of the song from Spotify
-The album that the song is from
+Command: node liri.js spotify-this-song (Insert Song Title)
+
+The above command will search the Spotify API and will output the following information about the song in your terminal:
+
+Artist
+Song name
+A Preview Link Of The Song From Spotify
+The Album That The Song Is From
 
 
 ### OMDB:
 
-node liri.js movie-this <Insert Movie Title>
-This will output the following information to your terminal/bash window:
-Title of the movie.
-Year the movie came out.
-IMDB Rating of the movie.
-Country where the movie was produced.
-Language of the movie.
-Plot of the movie.
-Actors in the movie.
-Rotten Tomatoes Rating.
-Rotten Tomatoes URL.
+Command: node liri.js movie-this (Insert Movie Title)
 
+The above command will search the OMDB API will and will output the following information to your terminal:
+
+Title Of The Movie:
+Year The Movie Came Out:
+IMDB Rating Of The Movie:
+Rotten Tomatoes Rating Of The Movie:
+Country Where The Movie Was Produced:
+Language Of The Movie:
+Plot Of The Movie:
+Actors In The Movie:
 
 ### Do What It Says
 
-node liri.js do-what-it-says
+Command: node liri.js do-what-it-says (Enter Your Desired Text)
 Using the fs Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
