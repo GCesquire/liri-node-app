@@ -12,7 +12,7 @@ By typing the appropirate instructions into the Command Line, the user may retri
 
 Command: node liri.js concert-this (Insert Band OR Artist Name)
 
-
+![](Bands.gif)
 
 The above command will search the Bands in Town Artist Events API for an artist and render the following information about each event to the terminal:
 
