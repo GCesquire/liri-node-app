@@ -157,7 +157,7 @@ function getRandom() {
     });
 };
 
-function dataLog(dataToLog) {
+const dataLog = (dataToLog) => {
 
 	console.log(dataToLog);
 	fs.appendFile('log.txt', dataToLog + '\n', function(err) {
