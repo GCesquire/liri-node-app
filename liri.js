@@ -24,7 +24,7 @@ function switchCase() {
         break;
 
         case 'do-what-it-says':
-        getRandom();
+        randomText();
         break;
 
         default:                            
@@ -127,7 +127,7 @@ const omdb = (parameter) => {
 };
 
 
-function getRandom() {
+const randomText = () => {
     fs.readFile('random.txt', "utf8", function(error, data){
 
         if (error) {
@@ -157,10 +157,10 @@ function getRandom() {
     });
 };
 
-const dataLog = (dataToLog) => {
+const dataLog = (parameter) => {
 
-	console.log(dataToLog);
-	fs.appendFile('log.txt', dataToLog + '\n', function(err) {
+	console.log(parameter);
+	fs.appendFile('log.txt', parameter + '\n', function(err) {
 		if (err) return dataLog('Error logging data to file: ' + err);	
 	});
 }
