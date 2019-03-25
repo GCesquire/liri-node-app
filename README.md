@@ -44,6 +44,8 @@ The Album That The Song Is From:
 
 Command: node liri.js movie-this (Insert Movie Title)
 
+![](OMDB.gif)
+
 The above command will search the OMDB API will and will output the following information to your terminal:
 
 Title Of The Movie:
