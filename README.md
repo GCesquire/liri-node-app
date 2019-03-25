@@ -15,7 +15,9 @@ Command: node liri.js concert-this (Insert Band OR Artist Name)
 The above command will search the Bands in Town Artist Events API for an artist and render the following information about each event to the terminal:
 
 Name Of The Venue
+
 Venue Location
+
 Date Of The Event
 
 
@@ -26,8 +28,11 @@ Command: node liri.js spotify-this-song (Insert Song Title)
 The above command will search the Spotify API and will output the following information about the song in your terminal:
 
 Artist
+
 Song name
+
 A Preview Link Of The Song From Spotify
+
 The Album That The Song Is From
 
 
@@ -38,12 +43,19 @@ Command: node liri.js movie-this (Insert Movie Title)
 The above command will search the OMDB API will and will output the following information to your terminal:
 
 Title Of The Movie:
+
 Year The Movie Came Out:
+
 IMDB Rating Of The Movie:
+
 Rotten Tomatoes Rating Of The Movie:
+
 Country Where The Movie Was Produced:
+
 Language Of The Movie:
+
 Plot Of The Movie:
+
 Actors In The Movie:
 
 ### Do What It Says
