@@ -67,4 +67,5 @@ Actors In The Movie:
 ### Do What It Says
 
 Command: node liri.js do-what-it-says (Enter Your Desired Text)
+
 Using the fs Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
