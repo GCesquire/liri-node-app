@@ -14,11 +14,11 @@ Command: node liri.js concert-this (Insert Band OR Artist Name)
 
 The above command will search the Bands in Town Artist Events API for an artist and render the following information about each event to the terminal:
 
-Name Of The Venue
+Name Of The Venue:
 
-Venue Location
+Venue Location:
 
-Date Of The Event
+Date Of The Event:
 
 
 ### Spotify:
@@ -27,13 +27,13 @@ Command: node liri.js spotify-this-song (Insert Song Title)
 
 The above command will search the Spotify API and will output the following information about the song in your terminal:
 
-Artist
+Artist:
 
-Song name
+Song Name:
 
-A Preview Link Of The Song From Spotify
+A Preview Link Of The Song From Spotify:
 
-The Album That The Song Is From
+The Album That The Song Is From:
 
 
 ### OMDB:
