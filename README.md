@@ -27,6 +27,8 @@ Date Of The Event:
 
 Command: node liri.js spotify-this-song (Insert Song Title)
 
+![](Spotify.gif)
+
 The above command will search the Spotify API and will output the following information about the song in your terminal:
 
 Artist:
