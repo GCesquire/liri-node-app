@@ -2,13 +2,23 @@
 
 ## About
 
-LIRI is a Language Interpretation and Recognition Interface. LIRI will be a command line node app that takes in parameters and gives you back data.
+LIRI is a Language Interpretation and Recognition Interface. LIRI will be a Command Line Node App that takes in parameters and gives you back data.
 
 ## What it does
 
+By typing the appropirate instructions into the Command Line, the user may retrieve data from a number of APIs which whill present the desired data onto the Command Line. 
+
 ### Bands In Town:
 
-node liri.js spotify-this-song <Insert Band OR Artist Name>
+Command:
+
+node liri.js concert-this <Insert Band OR Artist Name>
+
+The above command will search the Bands in Town Artist Events API for an artist and render the following information about each event to the terminal:
+
+Name of the venue
+Venue location
+Date of the Event (use moment to format this as "MM/DD/YYYY")
 
 
 ### Spotify:
