@@ -60,7 +60,7 @@ const bandsInTown = (parameter) => {
                 var day = concertTime.substring(8,10);
                 var dateForm = month + "/" + day + "/" + year
 
-                dataLog("\n---------------------------------------------------\n");
+                dataLog("\n-----------------------------------------\n");
                 dataLog("Date: " + dateForm);
                 dataLog("Name: " + parsedJSON[i].venue.name);
                 dataLog("City: " + parsedJSON[i].venue.city);
@@ -69,7 +69,7 @@ const bandsInTown = (parameter) => {
                     dataLog("Country: " + parsedJSON[i].venue.region);
                 }
                 dataLog("Country: " + parsedJSON[i].venue.country);
-                dataLog("\n---------------------------------------------------\n");
+                dataLog("\n-----------------------------------------\n");
             }   
         }
     });
@@ -94,12 +94,12 @@ const spotify = (parameter) => {
             dataLog('Error occurred: ' + error);
             return;
         } else {
-            dataLog("\n---------------------------------------------------\n");
+            dataLog("\n-----------------------------------------\n");
             dataLog("Artist: " + data.tracks.items[0].artists[0].name);
             dataLog("Song: " + data.tracks.items[0].name);
             dataLog("Preview: " + data.tracks.items[3].preview_url);
             dataLog("Album: " + data.tracks.items[0].album.name);
-            dataLog("\n---------------------------------------------------\n");
+            dataLog("\n-----------------------------------------\n");
         }
     });
 };
